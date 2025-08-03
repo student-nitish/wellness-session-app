@@ -8,10 +8,13 @@ const Dashboard = () => {
   const nav = useNavigate();
 
   const handler = async ()=>{
-     localStorage.removeItem("token")
-     toast.success("Logged Out")
-    nav("/")
+     try {
+    await API.post("/auth/logout"); // clears cookie
+  } finally {
+    localStorage.removeItem("token"); // clear your stored token
+    nav("/");
   }
+};
 
   useEffect(() => {
     const fetchPublicSessions = async () => {

@@ -112,6 +112,8 @@ require("dotenv").config();
                const options = {
                    expires: new Date(Date.now() + 3*24*60*60*1000),
                    httpOnly:true,
+                    secure: true,        // required on HTTPS origins like Vercel
+                    sameSite: "none",    // needed for cross-origin cookie to be sent
                }
                res.cookie("token", token, options).status(200).json({
                    success:true,
@@ -137,3 +139,14 @@ require("dotenv").config();
            });
        }
    };
+
+   exports.logoutUser = (req, res) => {
+  res
+    .cookie("token", "", {
+      httpOnly: true,
+      secure: true,
+      sameSite: "none",
+      expires: new Date(0),
+    })
+    .json({ success: true, message: "Logged out" });
+};
