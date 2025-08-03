@@ -1,4 +1,6 @@
 # dependencies
-/node_modules
+/node_modules/
 
+# environment variables (don't commit secrets)
 .env
+.env.*.local
