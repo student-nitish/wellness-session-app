@@ -2,6 +2,9 @@
 
 A full-stack wellness session platform where users can create, manage, draft, and publish structured wellness sessions (e.g., meditation, yoga, breathing exercises) with tagging, auto-save, and secure authentication.
 
+#Live Demo
+https://wellness-session-app-lghj.vercel.app/
+
 
 ---
 
