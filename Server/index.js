@@ -22,6 +22,6 @@ database.connect();
 app.use("/api/v1/auth", authRoutes);
 app.use("/api/v1/session", sessionRoutes);
 
-app.get('/', (req, res) => res.send('Wellness API Running'));
+app.get('/', (req, res) => res.send('Wellness API backend Running'));
 
 app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
