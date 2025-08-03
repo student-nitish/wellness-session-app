@@ -5,7 +5,7 @@ const User=require("../models/User");
 //  Get all published sessions (public)
 exports.getPublicSessions = async (req, res) => {
   try {
-    const sessions = await Session.find({ status: 'published' }).populate('user_id', 'email');
+    const sessions = await Session.find({ status: 'published' }).populate('user_id', 'email , firstName , lastName');
     res.status(200).json({ success: true, data: sessions });
   } catch (error) {
     res.status(500).json({ success: false, message: 'Server Error' });

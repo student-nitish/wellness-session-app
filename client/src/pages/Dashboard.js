@@ -12,6 +12,7 @@ const Dashboard = () => {
     await API.post("/auth/logout"); // clears cookie
   } finally {
     localStorage.removeItem("token"); // clear your stored token
+    toast.success("logout succesfully");
     nav("/");
   }
 };
@@ -63,7 +64,7 @@ const Dashboard = () => {
           sessions.map((s) => (
             <div key={s._id} className="border rounded p-4">
               <h3 className="font-semibold">{s.title}</h3>
-              <p className="text-sm text-gray-600">By {s.user_id?.email}</p>
+              <p className="text-sm text-gray-600">By {s.user_id?.firstName} {s.user_id?.lastName}</p>
               <p className="text-sm">Tags: {s.tags?.join(", ")}</p>
               <p className="text-sm italic">Status: {s.status}</p>
                <p className="text-sm italic">Steps:</p>
