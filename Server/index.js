@@ -9,8 +9,11 @@ const authRoutes = require("./routes/auth");
 const sessionRoutes = require("./routes/session");
 
 app.use(cors({
-  origin: "http://localhost:3000",
-  credentials: true, // allow cookies to be sent
+  origin: [
+    "http://localhost:3000",                   // local dev
+    "https://wellness-session-app-lghj.vercel.app", // your deployed frontend
+  ],
+  credentials: true,
 }));
 
 app.use(express.json());
