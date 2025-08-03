@@ -1,6 +1,0 @@
-# dependencies
-/node_modules/
-
-# environment variables (don't commit secrets)
-.env
-.env.*.local

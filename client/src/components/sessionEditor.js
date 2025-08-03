@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import API from "../services/api";
 import toast from "react-hot-toast";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const SessionEditor = ({ existing }) => {
   const [title, setTitle] = useState(existing?.title || "");
@@ -94,11 +94,12 @@ useEffect(() => {
             // publish     
            const res= await API.post("/session/my-sessions/publish", { sessionId });
             setStatusMsg("Published");
-            nav("/my-sessions");
+           
           }}
         >
           Publish
         </button>
+        <Link to={"/my-sessions"} className=" text-blue-500 font-semibold underline"> Go to my session page</Link>
       </div>
     </div>
   );
