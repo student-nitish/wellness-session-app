@@ -8,22 +8,23 @@ const cookieParser = require("cookie-parser");
 const authRoutes = require("./routes/auth");
 const sessionRoutes = require("./routes/session");
 
-const allowedOrigins = [
-  "https://wellness-session-app-lghj.vercel.app", // frontend on Vercel
-  "http://localhost:3000" // local dev
-];
-
-app.use(cors({
+const corsOptions = {
   origin: function (origin, callback) {
-    if (!origin || allowedOrigins.includes(origin)) {
+    if (!origin || origin === "http://localhost:3000" || origin.endsWith(".vercel.app")) {
       callback(null, true);
     } else {
-      callback(new Error("Not allowed by CORS"));
+      callback(new Error("Not allowed by CORS: " + origin));
     }
   },
   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
   credentials: true
-}));
+};
+
+app.use(cors(corsOptions));
+
+// Handle preflight requests with the same options
+// app.options("*", cors(corsOptions));
+
 
 
 
@@ -34,7 +35,7 @@ const PORT = process.env.PORT || 5000;
 database.connect();
 
 app.use("/api/v1/auth", authRoutes);
-app.use("/api/v1/session", sessionRoutes);
+ app.use("/api/v1/session", sessionRoutes);
 
 app.get('/', (req, res) => res.send('Wellness API backend Running'));
 
