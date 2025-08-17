@@ -8,13 +8,24 @@ const cookieParser = require("cookie-parser");
 const authRoutes = require("./routes/auth");
 const sessionRoutes = require("./routes/session");
 
+const allowedOrigins = [
+  "https://wellness-session-app-lghj.vercel.app", // frontend on Vercel
+  "http://localhost:3000" // local dev
+];
+
 app.use(cors({
-  origin: [
-    "http://localhost:3000",                   // local dev
-    "https://wellness-session-app-lghj.vercel.app", // your deployed frontend
-  ],
-  credentials: true,
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+  credentials: true
 }));
+
+
 
 app.use(express.json());
 app.use(cookieParser());
